@@ -7,3 +7,8 @@ export class DataTest {
     createdAt:string='';
     updatedAt:string='';
 }
+export class Cat{
+    categoryID:number=0;
+    categoryName:string='';
+    listings:string='';
+}

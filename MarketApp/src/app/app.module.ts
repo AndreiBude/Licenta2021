@@ -7,6 +7,7 @@ import { AppRoutingModule,routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CRUDFormComponent } from './data-test/crud-form/crud-form.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MainComponent } from './MainPage/main/main.component';
 
 @NgModule({
   declarations: [

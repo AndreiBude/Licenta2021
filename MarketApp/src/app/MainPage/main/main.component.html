@@ -26,9 +26,7 @@
       
     </div>
   </header>
-<div class="link">
-    <a href="/DataTest">Hello</a>
-</div>
+
 <div class="row row-cols-1 row-cols-md-4 mb-4 text-center">
     <div class="col">
       <div class="card mb-4 rounded-3 shadow-sm">
@@ -75,6 +73,12 @@
 </div>
 <div class="anunturi-recente">
   <h2>Anunțuri recente</h2>
+  <div class="link dropdown">
+    <button class="dropdown-toggle" data-bs-toggle="dropdown">Cateogrii</button>
+    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+      <li *ngFor="let cat of service.cats"><a class="dropdown-item" href="#">{{cat.categoryName}}</a></li>
+    </ul>
+    </div>
   <div class="carduri">
   <div class="card" style="width: 18rem;">
     <img class="card-img-top" src="src\assets\img\noun-washing-machine-1552906.png" alt="Card image cap">
