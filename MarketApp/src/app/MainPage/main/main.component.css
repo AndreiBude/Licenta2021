@@ -1,29 +1,53 @@
 #navbar{
     background-color: rgb(240, 90, 49);
 }
+.titlu{
+  color: white;
+}
 input[type="search"]:focus{
     border-color: none;
     box-shadow:none;
     outline: none;
     border-color: grey;
 }
-.card{
-    width: 300px;
-    height: 300px;
-    background-color: rgb(194, 194, 194);
+.row{
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+  padding:0em 5em;
 }
-.card{
-    transition:         0.8s ease-in;
-  -o-transition:      0.8s ease-in;
-  -ms-transition:     0.8s ease-in;
-  -moz-transition:    0.8s ease-in;
-  -webkit-transition: 0.8s ease-in;
+
+.col{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0em 4rem;
+  min-width: 22em;
 }
-.card:hover {
+
+.col .card{
+  width: 17em;
+  height: 17em;
+  background-color: rgb(218, 218, 218);
+  flex: 1 0 24%;
+  min-width: 17em;
+  transition:         0.3s ease-in;
+  -o-transition:      0.3s ease-in;
+  -ms-transition:     0.3s ease-in;
+  -moz-transition:    0.3s ease-in;
+  -webkit-transition: 0.3s ease-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px rgb(175, 175, 175);;
+  border-radius: 0em!important;
+}
+.col .card:hover {
     background-color: rgb(240, 90, 49);
+    box-shadow: 5px 5px 8px 0 rgba(0,0,0,0.2)!important;
   }
   
-  .card:before {
+  .col .card:before {
     content: "";
     position: absolute;
     background: #383736;
@@ -32,11 +56,21 @@ input[type="search"]:focus{
     right: 0;
     top: 100%;
     z-index: -1;
-    -webkit-transition: center 0.8s ease-in;
+    -webkit-transition: center 0.3s ease-in;
     transition: ease-in;
   }
   
-  .card:hover:before {
+  .col .card:hover:before {
     top: 0;
   }
+  .col .card img{
+    width: 3em;
+  }
   
+  .anunturi-recente{
+    padding: 0px 4rem;
+  }
+  .carduri{
+    display: flex;
+    justify-content: space-evenly;
+  }
