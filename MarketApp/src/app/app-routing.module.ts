@@ -4,10 +4,12 @@ import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { MainComponent } from './MainPage/main/main.component';
 import { DataTestComponent } from './data-test/data-test.component';
+import { ProductPageComponent } from './product-page/procut-page.component';
 
 const routes: Routes = [
   {path: 'MainPage', component:MainComponent},
-  {path:"DataTest", component:DataTestComponent}
+  {path:"DataTest", component:DataTestComponent},
+  {path:"Listing",component:ProductPageComponent}
 ];
 
 @NgModule({

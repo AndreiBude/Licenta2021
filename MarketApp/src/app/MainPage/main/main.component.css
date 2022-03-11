@@ -1,15 +1,9 @@
-#navbar{
-    background-color: rgb(240, 90, 49);
+
+body{
+  padding: 4rem 0em 8em 0em;
+  background-color: #f8f8f8;
 }
-.titlu{
-  color: white;
-}
-input[type="search"]:focus{
-    border-color: none;
-    box-shadow:none;
-    outline: none;
-    border-color: grey;
-}
+
 .row{
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -74,3 +68,4 @@ input[type="search"]:focus{
     display: flex;
     justify-content: space-evenly;
   }
+

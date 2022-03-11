@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { CRUDFormComponent } from './data-test/crud-form/crud-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './MainPage/main/main.component';
+import { ProductPageComponent } from './product-page/procut-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CRUDFormComponent,
     routingComponents,
+    ProductPageComponent,
   ],
   imports: [
     AppRoutingModule,

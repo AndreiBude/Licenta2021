@@ -1,0 +1,32 @@
+.prod{
+    display: flex;
+}
+.card{
+    margin: 0% 4em;
+    padding: 1em 1em;
+}
+.carousel{
+    width: 55em;
+}
+body{
+    padding: 4rem 0em 8em 0em;
+    background-color: #f8f8f8;
+}
+.descriere{
+    margin-left: 1em;
+    border-left: 1px solid #afafaf;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em 1em;
+}
+.descriere button{
+    color: rgb(240, 90, 49);
+    border-color: rgb(240, 90, 49);
+    font-size: larger;
+    min-width: 13em;
+}
+.descriere button:hover{
+    color: white;
+    background-color: rgb(240, 90, 49);
+}
