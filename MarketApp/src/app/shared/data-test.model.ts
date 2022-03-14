@@ -12,3 +12,12 @@ export class Cat{
     categoryName:string='';
     listings:string='';
 }
+export class Listing {
+    listingID:number=0;
+    userID:DataTest;
+    title:string='';
+    price:number=0;
+    categoryID:Cat;
+    description:string='';
+    publishedAt:string='';
+}
