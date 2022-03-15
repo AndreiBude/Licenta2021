@@ -9,7 +9,7 @@ import { ProductPageComponent } from './product-page/procut-page.component';
 const routes: Routes = [
   {path: 'MainPage', component:MainComponent},
   {path:"DataTest", component:DataTestComponent},
-  {path:"Listing",component:ProductPageComponent}
+  {path:'Listing/:id',component:ProductPageComponent}
 ];
 
 @NgModule({

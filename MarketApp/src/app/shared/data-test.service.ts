@@ -49,11 +49,18 @@ export class CategoryService {
 export class ListingService{
   constructor(private https:HttpClient){ }
   listings:Listing = new Listing();
-  readonly listingUrl = 'https://localhost:44309/api/Listings/4';
+  readonly listingUrl = 'https://localhost:44309/api/Listings';
+  idu:number = 0;
   listing : Listing;
-  getListing(){
-    this.https.get(this.listingUrl)
+  listingz : Listing[];
+  getListing(id:number){
+    this.https.get(this.listingUrl+"/"+id)
     .toPromise()
     .then(res=>this.listing=res as Listing)
+  }
+  getListings(){
+    this.https.get(this.listingUrl)
+    .toPromise()
+    .then(res=>this.listingz=res as Listing[])
   }
 }

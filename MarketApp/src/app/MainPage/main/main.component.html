@@ -49,27 +49,19 @@
   <div class="link dropdown">
     <button class="dropdown-toggle" data-bs-toggle="dropdown">Cateogrii</button>
     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-      <li *ngFor="let cat of service.cats"><a class="dropdown-item" href="#">{{cat.categoryName}}</a></li>
+      <li *ngFor="let cat of serviceC.cats"><a class="dropdown-item" href="#">{{cat.categoryName}}</a></li>
     </ul>
     </div>
   <div class="carduri">
-  <div class="card" style="width: 18rem;">
+  <div *ngFor="let listing of serviceL.listingz" class="card" style="width: 18rem;">
     <img class="card-img-top" src="src\assets\img\noun-washing-machine-1552906.png" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title">Titlu</h5>
-      <p class="card-text">Descriere produs</p>
-      <a href="#" class="btn btn-primary">Contacteaza cumparatorul</a>
+      <h5 class="card-title">{{listing.title}}</h5>
+      <p class="card-text">{{listing.description}}</p>
+      <a (click)=item(listing.listingID) class="btn btn-primary">Contacteaza cumparatorul</a>
     </div>
   </div>
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="src\assets\img\noun-washing-machine-1552906.png" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Titlu</h5>
-        <p class="card-text">Descriere produs</p>
-        <a href="#" class="btn btn-primary">Contacteaza cumparatorul</a>
-      </div>
-
-</div>
+    
 </div>
 </div>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
