@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VirtualMarket.DTO;
 using VirtualMarket.Models;
 
 namespace VirtualMarket.Controllers
@@ -81,6 +82,17 @@ namespace VirtualMarket.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.UserID }, user);
+        }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<User>> Login(LoginDto loginDto)
+        {
+            var user = await _context.Users
+                .SingleOrDefaultAsync(x => x.Email == loginDto.Email);
+
+            if (user == null) return Unauthorized("Email not existing");
+            if (user.Password != loginDto.Password) return Unauthorized("Wrong Password!");
+            return user;
         }
 
         // DELETE: api/Users/5
