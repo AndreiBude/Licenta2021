@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { DataTest,Cat, Listing } from './data-test.model';
-import {HttpClient} from "@angular/common/http"
+import { DataTest,Cat, Listing} from './data-test.model';
+import {HttpClient} from "@angular/common/http";
+import {map} from "rxjs/operators";
+import { ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class DataTestService {
   readonly baseUrl = `https://localhost:44309/api/Users`;
  
   list : DataTest[];
-  
+  user : DataTest;
   postUser(){
     return this.http.post(this.baseUrl,this.formData)
   }
@@ -25,6 +27,11 @@ export class DataTestService {
   }
   deleteDataTest(id:number){
     return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+  getUserById(id:number){
+    this.http.get(`${this.baseUrl}/${id}`)
+    .toPromise()
+    .then(res=>this.user=res as DataTest)
   }
   
 }
@@ -62,5 +69,34 @@ export class ListingService{
     this.https.get(this.listingUrl)
     .toPromise()
     .then(res=>this.listingz=res as Listing[])
+  }
+}
+
+@Injectable({
+  providedIn:'root'
+})
+export class AccountService{
+  constructor(private https:HttpClient){ }
+  readonly baseUrl = 'https://localhost:44309/api/Users';
+  private currentUserSource= new ReplaySubject<DataTest>(1);
+  currentUser$=this.currentUserSource.asObservable();
+  currentId:number;
+  login(model:any){
+    return this.https.post<DataTest>(this.baseUrl+'/Login',model).pipe(
+      map((response : DataTest) => {
+        const user = response;
+        if(user){
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUserSource.next(user);
+        }
+      })
+    ) 
+  }
+  logout(){
+    localStorage.removeItem('user');
+    this.currentUserSource.next();
+  }
+  setUser(user:DataTest){
+    this.currentUserSource.next(user);
   }
 }

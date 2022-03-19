@@ -9,6 +9,7 @@ import { CRUDFormComponent } from './data-test/crud-form/crud-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './MainPage/main/main.component';
 import { ProductPageComponent } from './product-page/procut-page.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ProductPageComponent } from './product-page/procut-page.component';
     CRUDFormComponent,
     routingComponents,
     ProductPageComponent,
+    LoginComponent,
   ],
   imports: [
     AppRoutingModule,

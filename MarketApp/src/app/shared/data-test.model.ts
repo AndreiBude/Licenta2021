@@ -14,10 +14,13 @@ export class Cat{
 }
 export class Listing {
     listingID:number=0;
-    userID:DataTest;
+    userID:number=0;
     title:string='';
     price:number=0;
     categoryID:Cat;
     description:string='';
     publishedAt:string='';
+}
+export class User {
+    username:string='';
 }
