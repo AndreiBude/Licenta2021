@@ -24,10 +24,13 @@
 .mb-4 a{
     color:#1266f1;
 }
-.btn-primary{
+.btn{
     background-color:#1266f1;
     border-color: #1266f1;
+    margin:2em 0em;
+    color:white;
 }
+
 .divider:after,
 .divider:before {
   content: "";
@@ -38,6 +41,7 @@
 form button{
    width: 100%;
 }
+
 .red{
     color:red;
     font-size: smaller;

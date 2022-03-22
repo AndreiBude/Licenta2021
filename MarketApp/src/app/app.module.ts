@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './MainPage/main/main.component';
 import { ProductPageComponent } from './product-page/procut-page.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { LoginComponent } from './login/login.component';
     routingComponents,
     ProductPageComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     AppRoutingModule,

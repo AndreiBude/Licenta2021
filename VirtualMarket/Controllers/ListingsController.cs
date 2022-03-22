@@ -32,13 +32,12 @@ namespace VirtualMarket.Controllers
         public async Task<ActionResult<Listing>> GetListing(int id)
         {
             var listing = await _context.Listings.FindAsync(id);
+             if (listing == null)
+             {
+                 return NotFound();
+             }
 
-            if (listing == null)
-            {
-                return NotFound();
-            }
-
-            return listing;
+             return listing;
         }
 
         // PUT: api/Listings/5
@@ -82,6 +81,7 @@ namespace VirtualMarket.Controllers
 
             return CreatedAtAction("GetListing", new { id = listing.ListingID }, listing);
         }
+
 
         // DELETE: api/Listings/5
         [HttpDelete("{id}")]

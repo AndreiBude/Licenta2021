@@ -78,10 +78,16 @@ namespace VirtualMarket.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            if (await EmailExistis(user.Email)) return BadRequest("Email already existing");
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.UserID }, user);
+        }
+
+        private async Task<bool> EmailExistis(string email)
+        {
+            return await _context.Users.AnyAsync(x => x.Email.ToLower() == email.ToLower());
         }
 
         [HttpPost("Login")]
