@@ -31,7 +31,7 @@ namespace VirtualMarket.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Listing>> GetListing(int id)
         {
-            var listing = await _context.Listings.FindAsync(id);
+             var listing = await _context.Listings.FindAsync(id);
              if (listing == null)
              {
                  return NotFound();

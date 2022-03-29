@@ -9,7 +9,7 @@ import { ReplaySubject } from 'rxjs';
 })
 export class DataTestService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private https:HttpClient) { }
 
   formData:DataTest = new DataTest();
   
@@ -18,18 +18,18 @@ export class DataTestService {
   list : DataTest[];
   user : DataTest;
   postUser(){
-    return this.http.post(this.baseUrl,this.formData)
+    return this.https.post(this.baseUrl,this.formData)
   }
   refreshlist(){
-    this.http.get(this.baseUrl)
+    this.https.get(this.baseUrl)
     .toPromise()
     .then(res=>this.list=res as DataTest[])
   }
   deleteDataTest(id:number){
-    return this.http.delete(`${this.baseUrl}/${id}`);
+    return this.https.delete(`${this.baseUrl}/${id}`);
   }
   getUserById(id:number){
-    this.http.get(`${this.baseUrl}/${id}`)
+    this.https.get(`${this.baseUrl}/${id}`)
     .toPromise()
     .then(res=>this.user=res as DataTest)
   }
@@ -56,6 +56,7 @@ export class CategoryService {
 export class ListingService{
   constructor(private https:HttpClient){ }
   listings:Listing = new Listing();
+  formData:Listing = new Listing();
   readonly listingUrl = 'https://localhost:44309/api/Listings';
   idu:number = 0;
   listing : Listing;
@@ -69,6 +70,9 @@ export class ListingService{
     this.https.get(this.listingUrl)
     .toPromise()
     .then(res=>this.listingz=res as Listing[])
+  }
+  postLising(){
+      return this.https.post(this.listingUrl,this.formData)
   }
 }
 

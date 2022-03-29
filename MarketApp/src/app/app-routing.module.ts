@@ -7,6 +7,7 @@ import { DataTestComponent } from './data-test/data-test.component';
 import { ProductPageComponent } from './product-page/procut-page.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AddListingComponent } from './add-listing/add-listing.component';
 
 const routes: Routes = [
   {path:'MainPage', component:MainComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path:'Listing/:id',component:ProductPageComponent},
   {path:'',   redirectTo: 'MainPage', pathMatch: 'full' },
   {path:'Login',component:LoginComponent},
-  {path:'Register',component:RegisterComponent}
+  {path:'Register',component:RegisterComponent},
+  {path:'AddListing',component:AddListingComponent}
 ];
 
 @NgModule({

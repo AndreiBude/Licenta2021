@@ -1,0 +1,46 @@
+<section>
+    <div class="container py-5 shadow-sm">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img [src]="imageUrl"
+                    class="img-fluid" alt="Upload Image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+                    <input type="hidden" name="usersID" />
+                    <div class="form-group">
+                        <label>Titlu</label>
+                        <input class="form-control mb-4 form-control-lg" placeholder="Titlu" name="titlu">
+                    </div>
+                    <div class="form-group">
+                        <label>Adauga imagini</label>
+                        <input (change)="handleFileInput($any($event).target.files)" type="file" accept="image/*" #Image class="form-control mb-4 form-control-lg" placeholder="Image" name="image">
+                    </div>
+                    <div class="form-group">
+                        <label>Descriere</label>
+                        <textarea class="form-control mb-4 form-control-lg" placeholder="descriere" type="descriere" name="descriere" ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Pret</label>
+                        <input class="form-control mb-4 form-control-lg" placeholder="pret"
+                            name="pret" required
+                            ng-show="pret.$invalid && pret.$touched">
+                    </div>
+                    <div class="form-group">
+                        <label>Categorie</label>
+                        <input class="form-control mb-4 form-control-lg" placeholder="Categorie"
+                            name="categorie" required
+                            ng-show="categorie.$invalid && categorie.$touched">
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-info btn-lg btn-block" type="submit"
+                            [disabled]="form.invalid">Adauga anuntul!</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

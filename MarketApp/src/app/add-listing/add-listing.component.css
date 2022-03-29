@@ -1,0 +1,56 @@
+textarea {
+    resize: none;
+    height: 7em;
+ }
+ .col-md-8{
+    display: flex;
+    justify-content: center;
+ }
+ .container{
+    background-color: white;
+    margin-top: 10em;
+    margin-bottom: 10em;
+    min-width: 55em;
+}
+.row{
+    flex-wrap: nowrap;
+    
+}
+.col-md-7{
+    border-left: solid 1px grey;
+    margin-left:0px;
+    padding: 0em 5em;
+}
+.col-md-8 img{
+    padding: 0em 4em 0em 1em;
+}
+
+.form-check-input{
+    background-color:#1266f1;
+    border-color: #1266f1;
+}
+.mb-4 a{
+    color:#1266f1;
+}
+.btn{
+    background-color:#1266f1;
+    border-color: #1266f1;
+    margin:2em 0em;
+    color:white;
+}
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+form button{
+   width: 100%;
+}
+
+.red{
+    color:red;
+    font-size: smaller;
+}
