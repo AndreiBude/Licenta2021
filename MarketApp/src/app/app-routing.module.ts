@@ -8,6 +8,7 @@ import { ProductPageComponent } from './product-page/procut-page.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AddListingComponent } from './add-listing/add-listing.component';
+import { UserListingsComponent } from './user-listings/user-listings.component';
 
 const routes: Routes = [
   {path:'MainPage', component:MainComponent},
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:'',   redirectTo: 'MainPage', pathMatch: 'full' },
   {path:'Login',component:LoginComponent},
   {path:'Register',component:RegisterComponent},
-  {path:'AddListing',component:AddListingComponent}
+  {path:'AddListing',component:AddListingComponent},
+  {path:'UserListings',component:UserListingsComponent}
 ];
 
 @NgModule({

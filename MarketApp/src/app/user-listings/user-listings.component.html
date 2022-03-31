@@ -1,0 +1,9 @@
+<p>user-listings works!</p>
+<div *ngFor="let listing of listingsService.listingz" class="card" style="width: 18rem;">
+    <img class="card-img-top" src="src\assets\img\noun-washing-machine-1552906.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{listing.title}}</h5>
+      <p class="card-text">{{listing.description}}</p>
+      <a class="btn btn-primary">Contacteaza cumparatorul</a>
+    </div>
+  </div>

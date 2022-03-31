@@ -12,6 +12,7 @@ import { ProductPageComponent } from './product-page/procut-page.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AddListingComponent } from './add-listing/add-listing.component';
+import { UserListingsComponent } from './user-listings/user-listings.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AddListingComponent } from './add-listing/add-listing.component';
     LoginComponent,
     RegisterComponent,
     AddListingComponent,
+    UserListingsComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ListingService } from '../shared/data-test.service';
+import { CategoryService, ListingService } from '../shared/data-test.service';
 @Component({
   selector: 'app-add-listing',
   templateUrl: './add-listing.component.html',
@@ -13,10 +13,12 @@ export class AddListingComponent implements OnInit {
   fileToUpload: File = null as any;
   constructor(public service: ListingService,
     public datepipe: DatePipe,
-    public _router: Router
+    public _router: Router,
+    public serviceC: CategoryService
   ) { }
   existing: boolean = false;
   ngOnInit(): void {
+    this.serviceC.getCats();
   }
   onSubmit(form: NgForm) {
 

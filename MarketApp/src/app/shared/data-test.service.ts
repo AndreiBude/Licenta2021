@@ -74,6 +74,11 @@ export class ListingService{
   postLising(){
       return this.https.post(this.listingUrl,this.formData)
   }
+  getListingsByUserId(id:number){
+    this.https.get(this.listingUrl+"/User/"+id)
+    .toPromise()
+    .then(res=>this.listingz=res as Listing[])
+  }
 }
 
 @Injectable({
