@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VirtualMarket.Models;
+using System.Web;
 
 namespace VirtualMarket.Controllers
 {
@@ -38,6 +39,14 @@ namespace VirtualMarket.Controllers
              }
 
              return listing;
+        }
+
+        // GET: api/Listings/User/5
+        [HttpGet("User/{id}")]
+        public async Task<ActionResult<IEnumerable<Listing>>> GetListingOfUser(int id)
+        {
+            var listing = await  _context.Listings.Where(l => l.UserID == id).ToListAsync();
+            return listing;
         }
 
         // PUT: api/Listings/5
@@ -76,7 +85,7 @@ namespace VirtualMarket.Controllers
         [HttpPost]
         public async Task<ActionResult<Listing>> PostListing(Listing listing)
         {
-            _context.Listings.Add(listing);
+             _context.Listings.Add(listing);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetListing", new { id = listing.ListingID }, listing);
