@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataTest } from './shared/data-test.model';
 import { AccountService } from './shared/data-test.service';
 
@@ -9,7 +10,7 @@ import { AccountService } from './shared/data-test.service';
 })
 export class AppComponent implements OnInit{
   title = 'MarketApp';
-  constructor(private accountService: AccountService) { }
+  constructor(private accountService: AccountService, private _router:Router) { }
   current_user:DataTest;
   loggedIn:boolean;
   ngOnInit(): void {
@@ -27,6 +28,17 @@ export class AppComponent implements OnInit{
     this.accountService.currentUser$.subscribe(user => {
       this.loggedIn= !!user;
       console.log("logat?" + this.loggedIn);
+    },error =>{
+      console.log(error);
+    })
+  }
+  myListings(){
+    this.accountService.currentUser$.subscribe(user => {
+      this.loggedIn= !!user;
+      if(this.loggedIn)
+      this._router.navigate(['/UserListings',user.userID])
+      else
+      this._router.navigate(['/Login']);
     },error =>{
       console.log(error);
     })

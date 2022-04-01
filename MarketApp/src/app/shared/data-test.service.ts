@@ -108,4 +108,13 @@ export class AccountService{
   setUser(user:DataTest){
     this.currentUserSource.next(user);
   }
+  getCurrentUser():number{
+    let userID=0;
+    this.currentUser$.subscribe(user => {
+      userID = user.userID;
+    },error =>{
+      console.log(error);
+    })
+    return userID;
+  }
 }

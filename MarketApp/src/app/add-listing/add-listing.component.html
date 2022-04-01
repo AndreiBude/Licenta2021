@@ -5,11 +5,12 @@
                 <img [src]="imageUrl" class="img-fluid" alt="Upload Image">
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+                <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit()">
                     <input type="hidden" name="usersID" />
                     <div class="form-group">
                         <label>Titlu</label>
-                        <input class="form-control mb-4 form-control-lg" placeholder="Titlu" name="titlu">
+                        <input class="form-control mb-4 form-control-lg" placeholder="Titlu" name="titlu"
+                        [(ngModel)]="service.formData.title" required>
                     </div>
                     <div class="form-group">
                         <label>Adauga imagini</label>
@@ -20,17 +21,18 @@
                         <label>Descriere</label>
                         <textarea class="form-control mb-4 form-control-lg" placeholder="Descriere" name="descriere"
                             name="descriere" #descriere="ngModel" [class.invalid]="descriere.invalid && descriere.touched"
-                            [(ngModel)]="service.formData.description"></textarea>
+                            [(ngModel)]="service.formData.description" required></textarea>
                     </div>
                     <div class="form-group">
                         <label>Pret</label>
-                        <input class="form-control mb-4 form-control-lg" placeholder="Pret" name="pret" required
-                            ng-show="pret.$invalid && pret.$touched">
+                        <div class="pret">
+                        <input id="numar" type="number" class="form-control mb-4 form-control-lg" placeholder="Pret" name="pret" required
+                            ng-show="pret.$invalid && pret.$touched" [(ngModel)]="service.formData.price"> <span>RON</span> 
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Categorie</label>
-                              <select class="form-select" aria-label="Default select example" name="categorie">
-                                <option selected>Categorie</option>
+                              <select class="form-select" aria-label="Default select example" [(ngModel)]="service.formData.categoryID" required  name="categorie">
                                 <option *ngFor="let cat of serviceC.cats" value="{{cat.categoryID}}">{{cat.categoryName}}</option>
                               </select>
                     </div>

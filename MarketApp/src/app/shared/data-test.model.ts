@@ -16,7 +16,7 @@ export class Listing {
     listingID:number=0;
     userID:number=0;
     title:string='';
-    price:number=0;
+    price:number;
     categoryID:Cat;
     description:string='';
     publishedAt:string='';

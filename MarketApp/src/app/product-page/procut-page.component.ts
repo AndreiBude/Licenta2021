@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataTestService, ListingService } from '../shared/data-test.service';
-import { DataTest, Listing } from '../shared/data-test.model';
-import { ActivatedRoute } from '@angular/router';
-import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-procut-page',
   templateUrl: './procut-page.component.html',
@@ -12,7 +10,8 @@ export class ProductPageComponent implements OnInit {
 
   constructor(public service:ListingService,
     public _route:ActivatedRoute,
-    public username:DataTestService
+    public username:DataTestService,
+    private _router:Router
     ) { }
 
   ngOnInit(): void {
@@ -21,5 +20,8 @@ export class ProductPageComponent implements OnInit {
   }
   getUser(){
     this.username.getUserById(this.service.listing.userID);
+  }
+  UserListings(id:number){
+    this._router.navigate(['/UserListings',id]);
   }
 }

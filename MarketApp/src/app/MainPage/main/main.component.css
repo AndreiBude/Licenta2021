@@ -39,6 +39,12 @@ body{
 .col .card:hover {
     background-color: rgb(240, 90, 49);
     box-shadow: 5px 5px 8px 0 rgba(0,0,0,0.2)!important;
+    animation-name: mouse;
+    animation-duration: 1s;
+  }
+  @keyframes mouse {
+    0%   {background-color: rgb(218, 218, 218)}
+    100% {background-color: rgb(240, 90, 49)}
   }
   
   .col .card:before {
@@ -67,5 +73,27 @@ body{
   .carduri{
     display: flex;
     justify-content: space-evenly;
+    grid-template-columns: repeat(auto-fill,minmax(225px,1fr));
+    min-width: none;
+
+  }
+  .carduri .card{
+    min-width: 10em;
   }
 
+
+  .card-text{
+    height: 3em;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    text-align: center;
+  }
+  .card-body a{
+    margin-top: 2em;
+  }
+  .card-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

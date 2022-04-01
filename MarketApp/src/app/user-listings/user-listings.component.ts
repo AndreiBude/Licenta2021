@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService, ListingService } from '../shared/data-test.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DataTest } from '../shared/data-test.model';
+import { AccountService, DataTestService, ListingService } from '../shared/data-test.service';
 
 @Component({
   selector: 'app-user-listings',
@@ -8,15 +10,22 @@ import { AccountService, ListingService } from '../shared/data-test.service';
 })
 export class UserListingsComponent implements OnInit {
 
-  constructor(private accountService:AccountService,public listingsService:ListingService) { }
-  userID:number;
-  ngOnInit(): void {
-    this.accountService.currentUser$.subscribe(user => {
-      this.listingsService.getListingsByUserId(user.userID);
-      console.log(user.userID);
-    },error =>{
-      console.log(error);
-    })
-  }
+  constructor(private accountService:AccountService,
+    public listingsService:ListingService,
+    private _route:ActivatedRoute,
+    public userService:DataTestService,
+    private _router:Router) { }
 
+  imageUrl: string = '/assets/img/logo.png';
+  user: DataTest;
+  reloaded:boolean = false;
+  ngOnInit(): void {
+    this._route.params.subscribe(routeParams => {
+    this.listingsService.getListingsByUserId(routeParams.id);
+    this.userService.getUserById(routeParams.id);
+    });
+  }
+  item(id:number){
+    this._router.navigate(['/Listing',id])
+  }
 }

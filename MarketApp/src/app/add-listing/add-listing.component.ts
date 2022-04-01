@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CategoryService, ListingService } from '../shared/data-test.service';
+import { AccountService, CategoryService, ListingService } from '../shared/data-test.service';
 @Component({
   selector: 'app-add-listing',
   templateUrl: './add-listing.component.html',
@@ -14,25 +14,24 @@ export class AddListingComponent implements OnInit {
   constructor(public service: ListingService,
     public datepipe: DatePipe,
     public _router: Router,
-    public serviceC: CategoryService
+    public serviceC: CategoryService,
+    public serviceU: AccountService
   ) { }
   existing: boolean = false;
   ngOnInit(): void {
     this.serviceC.getCats();
   }
-  onSubmit(form: NgForm) {
-
+  onSubmit() {
+    this.service.formData.userID = this.serviceU.getCurrentUser();
     let currentDateTime = this.datepipe.transform((new Date), 'yyyy-MM-ddThh:mm:ss') || '2010-12-12T00:00:00';
-    let postedAt = currentDateTime;
+    this.service.formData.publishedAt= currentDateTime;
+    console.log(this.service.formData);
     this.service.postLising().subscribe(
       res => {
         console.log("Success");
-        this._router.navigate(['/Login']);
       },
       err => {
-        if (err.error = "Email already existing")
-          this.existing = true;
-        else window.alert("Something went wrong! Please try again later");
+        console.log(err);
       }
     )
   }
