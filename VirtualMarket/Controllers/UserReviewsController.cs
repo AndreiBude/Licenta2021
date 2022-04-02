@@ -41,6 +41,17 @@ namespace VirtualMarket.Controllers
             return userReview;
         }
 
+        // GET: api/UserReviews/UserId/5
+        [HttpGet("UserId/{id}")]
+        public async Task<ActionResult<IEnumerable<UserReview>>> GetUserReviewsByUserId(int id)
+        {
+            var userReview = await _context.Reviews.Where(ur => ur.UserID == id).ToListAsync();
+            if (userReview == null)
+            {
+                return NotFound();
+            }
+            return userReview;
+        }
         // PUT: api/UserReviews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

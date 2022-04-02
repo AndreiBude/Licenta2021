@@ -24,3 +24,10 @@ export class Listing {
 export class User {
     username:string='';
 }
+export class UserReview{
+    reviewID:number=0;
+    userID:number=0;
+    text:string='';
+    rating:number=0;
+    createdAt:string=''
+}

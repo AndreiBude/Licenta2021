@@ -13,7 +13,7 @@ import { UserListingsComponent } from './user-listings/user-listings.component';
 const routes: Routes = [
   {path:'MainPage', component:MainComponent},
   {path:'DataTest', component:DataTestComponent},
-  {path:'Listing/:id',component:ProductPageComponent},
+  {path:'Listing/:id/:userid',component:ProductPageComponent},
   {path:'',   redirectTo: 'MainPage', pathMatch: 'full' },
   {path:'Login',component:LoginComponent},
   {path:'Register',component:RegisterComponent},

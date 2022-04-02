@@ -42,3 +42,27 @@ body{
     border-radius: 10px;
     min-width: 2em;
 }
+.author{
+    margin-top: 2em;
+}
+.title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    font-weight: bold;
+    padding-bottom: 0.7em;
+    border-bottom: 1px solid #d4d4d4;
+    margin: 0px 2em
+}
+
+.title img{
+    width: 5em;
+    height: 5em;
+    border-radius: 7em;
+}
+
+.review{
+    margin:0.5em 1em;
+}

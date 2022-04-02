@@ -47,10 +47,7 @@
 <div class="anunturi-recente">
   <h2>Anunțuri recente</h2>
   <div class="link dropdown">
-    <button class="dropdown-toggle" data-bs-toggle="dropdown">Cateogrii</button>
-    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-      <li *ngFor="let cat of serviceC.cats"><a class="dropdown-item" href="#">{{cat.categoryName}}</a></li>
-    </ul>
+    
     </div>
   <div class="carduri">
   <div *ngFor="let listing of serviceL.listingz" class="card" style="width: 18rem;">
@@ -58,7 +55,7 @@
     <div class="card-body">
       <h5 class="card-title">{{listing.title}}</h5>
       <p class="card-text">{{listing.description}}</p>
-      <a (click)=item(listing.listingID) class="btn btn-primary">Contacteaza cumparatorul</a>
+      <a (click)=item(listing.listingID,listing.userID) class="btn btn-primary">Contacteaza cumparatorul</a>
     </div>
   </div>
     

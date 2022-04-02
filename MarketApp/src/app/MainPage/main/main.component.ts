@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
     this.serviceC.getCats();
     this.serviceL.getListings();
   }
-  item(id:number){
-    this._router.navigate(['/Listing',id])
+  item(id:number,userid:number){
+    this._router.navigate(['/Listing',id,userid])
   }
 }

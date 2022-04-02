@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DataTest,Cat, Listing} from './data-test.model';
+import { DataTest,Cat, Listing,UserReview} from './data-test.model';
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import { ReplaySubject } from 'rxjs';
@@ -116,5 +116,20 @@ export class AccountService{
       console.log(error);
     })
     return userID;
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ReviewService {
+  constructor(private https:HttpClient) { }
+  review:UserReview = new UserReview();
+  readonly reviewUrl = `https://localhost:44309/api/UserReviews`;
+  reviews: UserReview[];
+  getReviewsById(id:number){
+    this.https.get(this.reviewUrl+"/UserId/"+id)
+    .toPromise()
+    .then(res=>this.reviews=res as UserReview[])
   }
 }
