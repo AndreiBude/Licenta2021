@@ -71,8 +71,16 @@ export class ListingService{
     .toPromise()
     .then(res=>this.listingz=res as Listing[])
   }
-  postLising(){
-      return this.https.post(this.listingUrl,this.formData)
+  postLising(fileToUpload: File){
+      const newFormData = new FormData();
+      newFormData.append('userID',this.formData.userID.toString());
+      newFormData.append('title',this.formData.title.toString());
+      newFormData.append('price',this.formData.price.toString());
+      newFormData.append('categoryID',this.formData.categoryID.toString());
+      newFormData.append('description',this.formData.description.toString());
+      newFormData.append('imageFile',fileToUpload,fileToUpload.name);
+      newFormData.append('publishedAt',this.formData.publishedAt.toString());
+      return this.https.post(this.listingUrl,newFormData)
   }
   getListingsByUserId(id:number){
     this.https.get(this.listingUrl+"/User/"+id)

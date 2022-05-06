@@ -20,6 +20,7 @@ export class Listing {
     categoryID:Cat;
     description:string='';
     publishedAt:string='';
+    imageSource:string='';
 }
 export class User {
     username:string='';

@@ -26,8 +26,7 @@ export class AddListingComponent implements OnInit {
     this.service.formData.userID = this.serviceU.getCurrentUser();
     let currentDateTime = this.datepipe.transform((new Date), 'yyyy-MM-ddThh:mm:ss') || '2010-12-12T00:00:00';
     this.service.formData.publishedAt= currentDateTime;
-    console.log(this.service.formData);
-    this.service.postLising().subscribe(
+    this.service.postLising(this.fileToUpload).subscribe(
       res => {
         console.log("Success");
       },

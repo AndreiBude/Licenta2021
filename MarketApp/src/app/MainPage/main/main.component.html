@@ -9,7 +9,7 @@
     </div>
     <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Car_icon_alone.png" alt="pictogramă mașină">
+            <img src="https://localhost:44309/images/car.png" alt="pictogramă mașină">
         </div>
       </div>
       <div class="col">
@@ -51,7 +51,7 @@
   <div class="carduri row row-cols-4">
   <div *ngFor="let listing of serviceL.listingz" class="col">
     <div class="card">
-    <img class="card-img-top" src="src\assets\img\noun-washing-machine-1552906.png" alt="Card image cap">
+    <img class="card-img-top" src="{{listing.imageSource}}" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{listing.title}}</h5>
       <p class="card-text">{{listing.description}}</p>

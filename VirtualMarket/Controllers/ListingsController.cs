@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VirtualMarket.Models;
 using System.Web;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace VirtualMarket.Controllers
 {
@@ -15,24 +17,52 @@ namespace VirtualMarket.Controllers
     public class ListingsController : ControllerBase
     {
         private readonly MarketContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public ListingsController(MarketContext context)
+        public ListingsController(MarketContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            this._hostEnvironment = hostEnvironment;
         }
 
         // GET: api/Listings
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Listing>>> GetListings()
         {
-            return await _context.Listings.ToListAsync();
+            return await _context.Listings
+                .Select(x => new Listing()
+                {
+                    ListingID = x.ListingID,
+                    UserID = x.UserID,
+                    Title = x.Title,
+                    Price = x.Price,
+                    CategoryID = x.CategoryID,
+                    Description = x.Description,
+                    ImagePath = x.ImagePath,
+                    PublishedAt = x.PublishedAt,
+                    ImageSource = String.Format("{0}://{1}{2}/images/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImagePath)
+                })
+                .ToListAsync();
         }
 
         // GET: api/Listings/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Listing>> GetListing(int id)
         {
-             var listing = await _context.Listings.FindAsync(id);
+            var listing = await _context.Listings
+                .Select(x => new Listing()
+                {
+                    ListingID = x.ListingID,
+                    UserID = x.UserID,
+                    Title = x.Title,
+                    Price = x.Price,
+                    CategoryID = x.CategoryID,
+                    Description = x.Description,
+                    ImagePath = x.ImagePath,
+                    PublishedAt = x.PublishedAt,
+                    ImageSource = String.Format("{0}://{1}{2}/images/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImagePath)
+                })
+                .FirstOrDefaultAsync(i => i.ListingID == id);
              if (listing == null)
              {
                  return NotFound();
@@ -45,7 +75,21 @@ namespace VirtualMarket.Controllers
         [HttpGet("User/{id}")]
         public async Task<ActionResult<IEnumerable<Listing>>> GetListingOfUser(int id)
         {
-            var listing = await  _context.Listings.Where(l => l.UserID == id).ToListAsync();
+            var listing = await  _context.Listings
+                .Select(x => new Listing()
+                {
+                    ListingID = x.ListingID,
+                    UserID = x.UserID,
+                    Title = x.Title,
+                    Price = x.Price,
+                    CategoryID = x.CategoryID,
+                    Description = x.Description,
+                    ImagePath = x.ImagePath,
+                    PublishedAt = x.PublishedAt,
+                    ImageSource = String.Format("{0}://{1}{2}/images/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImagePath)
+                })
+                .Where(l => l.UserID == id)
+                .ToListAsync();
             return listing;
         }
 
@@ -53,7 +97,21 @@ namespace VirtualMarket.Controllers
         [HttpGet("Category/{id}")]
         public async Task<ActionResult<IEnumerable<Listing>>> GetListingByCategory(int id)
         {
-            var listing = await _context.Listings.Where(l => l.CategoryID == id).ToListAsync();
+            var listing = await _context.Listings
+                .Select(x => new Listing()
+                {
+                    ListingID = x.ListingID,
+                    UserID = x.UserID,
+                    Title = x.Title,
+                    Price = x.Price,
+                    CategoryID = x.CategoryID,
+                    Description = x.Description,
+                    ImagePath = x.ImagePath,
+                    PublishedAt = x.PublishedAt,
+                    ImageSource = String.Format("{0}://{1}{2}/images/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImagePath)
+                })
+                .Where(l => l.CategoryID == id)
+                .ToListAsync();
             return listing;
         }
 
@@ -91,12 +149,13 @@ namespace VirtualMarket.Controllers
         // POST: api/Listings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Listing>> PostListing(Listing listing)
+        public async Task<ActionResult<Listing>> PostListing([FromForm] Listing listing)
         {
+            listing.ImagePath = await SaveImage(listing.ImageFile);
              _context.Listings.Add(listing);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetListing", new { id = listing.ListingID }, listing);
+            return StatusCode(201);
         }
 
 
@@ -119,6 +178,19 @@ namespace VirtualMarket.Controllers
         private bool ListingExists(int id)
         {
             return _context.Listings.Any(e => e.ListingID == id);
+        }
+
+        [NonAction]
+        public async Task<string> SaveImage(IFormFile imageFile)
+        {
+            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
+            imageName = imageName + DateTime.Now.ToString("yymmssffff") + Path.GetExtension(imageFile.FileName);
+            var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "images", imageName);
+            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(fileStream);
+            }
+            return imageName;
         }
     }
 }

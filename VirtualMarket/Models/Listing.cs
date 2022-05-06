@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,6 +25,10 @@ namespace VirtualMarket.Models
         public string Description { get; set; }
         [Column(TypeName = "nvarchar(200)")]
         public string ImagePath { get; set; } 
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
+        [NotMapped]
+        public string ImageSource  { get; set; }
         public DateTime PublishedAt { get; set; }
         [ForeignKey("UserID")]
         public User Users { get; set; }

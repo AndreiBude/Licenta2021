@@ -10,7 +10,8 @@ import { DataTestService } from '../shared/data-test.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  imageUrl: string = '/assets/img/upload.png';
+  fileToUpload: File = null as any;
   constructor(public service:DataTestService,
      public datepipe:DatePipe,
      public _router:Router
@@ -18,6 +19,18 @@ export class RegisterComponent implements OnInit {
     existing:boolean = false;
   ngOnInit(): void {
   }
+
+  handleFileInput(file: FileList) {
+    this.fileToUpload = file.item(0) as File;
+
+    //preview
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imageUrl = event.target.result;
+    }
+    reader.readAsDataURL(this.fileToUpload);
+  }
+  
   onSubmit(form:NgForm){
     
     let currentDateTime =this.datepipe.transform((new Date), 'yyyy-MM-ddThh:mm:ss')||'2010-12-12T00:00:00';

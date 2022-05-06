@@ -9,7 +9,7 @@
   <h3>Anunturi</h3>
   <div class="carduri">
     <div *ngFor="let listing of listingsService.listingz" class="card" style="width: 18rem;">
-      <img class="card-img-top" [src]="imageUrl" alt="Card image cap">
+      <img class="card-img-top" src="{{listing.imageSource}}" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{listing.title}}</h5>
         <p class="card-text">{{listing.description}}</p>
