@@ -1,0 +1,14 @@
+<body>
+    <div class="carduri row row-cols-4">
+        <div *ngFor="let listing of service.listingz" class="col">
+            <div class="card">
+                <img class="card-img-top" src="src\assets\img\noun-washing-machine-1552906.png" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{listing.title}}</h5>
+                    <p class="card-text">{{listing.description}}</p>
+                    <a class="btn btn-primary">Vizualizeaza anuntul</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

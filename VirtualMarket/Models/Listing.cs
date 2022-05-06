@@ -23,7 +23,7 @@ namespace VirtualMarket.Models
         [Column(TypeName = "nvarchar(500)")]
         public string Description { get; set; }
         [Column(TypeName = "nvarchar(200)")]
-        public string ImagePath { get; set; }
+        public string ImagePath { get; set; } 
         public DateTime PublishedAt { get; set; }
         [ForeignKey("UserID")]
         public User Users { get; set; }

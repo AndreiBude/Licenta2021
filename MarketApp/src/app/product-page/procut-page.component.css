@@ -66,3 +66,17 @@ body{
 .review{
     margin:0.5em 1em;
 }
+.rating i{
+    color:yellow;
+    -webkit-text-stroke: 1px black;
+}
+.descriere h5::first-line{
+    font-weight: bold;
+}
+.descriere h5{
+    font-weight: 400;
+}
+.title a{
+    text-decoration: none;
+    color:black;
+}

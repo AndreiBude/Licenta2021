@@ -43,4 +43,15 @@ export class AppComponent implements OnInit{
       console.log(error);
     })
   }
+  addListing(){
+    this.accountService.currentUser$.subscribe(user => {
+      this.loggedIn= !!user;
+      if(this.loggedIn)
+      this._router.navigate(['/AddListing'])
+      else
+      this._router.navigate(['/Login']);
+    },error =>{
+      console.log(error);
+    })
+  }
 }

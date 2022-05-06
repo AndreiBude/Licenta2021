@@ -20,6 +20,7 @@ export class AddListingComponent implements OnInit {
   existing: boolean = false;
   ngOnInit(): void {
     this.serviceC.getCats();
+    this.verifyUser();
   }
   onSubmit() {
     this.service.formData.userID = this.serviceU.getCurrentUser();
@@ -45,5 +46,13 @@ export class AddListingComponent implements OnInit {
     }
     reader.readAsDataURL(this.fileToUpload);
   }
-
+  verifyUser(){
+    this.serviceU.currentUser$.subscribe(user => {
+      this.existing= !!user;
+      if(!this.existing)
+      this._router.navigate(['/Login']);
+    },error =>{
+      console.log(error);
+    })
+  }
 }

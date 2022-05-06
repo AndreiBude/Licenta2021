@@ -49,6 +49,14 @@ namespace VirtualMarket.Controllers
             return listing;
         }
 
+        // GET: api/Listings/Category/5
+        [HttpGet("Category/{id}")]
+        public async Task<ActionResult<IEnumerable<Listing>>> GetListingByCategory(int id)
+        {
+            var listing = await _context.Listings.Where(l => l.CategoryID == id).ToListAsync();
+            return listing;
+        }
+
         // PUT: api/Listings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

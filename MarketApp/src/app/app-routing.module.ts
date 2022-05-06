@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AddListingComponent } from './add-listing/add-listing.component';
 import { UserListingsComponent } from './user-listings/user-listings.component';
+import { CategoryComponent } from './category/category.component';
 
 const routes: Routes = [
   {path:'MainPage', component:MainComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'Login',component:LoginComponent},
   {path:'Register',component:RegisterComponent},
   {path:'AddListing',component:AddListingComponent},
-  {path:'UserListings/:id',component:UserListingsComponent}
+  {path:'UserListings/:id',component:UserListingsComponent},
+  {path:'Category/:id',component:CategoryComponent}
 ];
 
 @NgModule({

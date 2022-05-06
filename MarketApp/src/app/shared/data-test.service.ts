@@ -79,6 +79,11 @@ export class ListingService{
     .toPromise()
     .then(res=>this.listingz=res as Listing[])
   }
+  getListingsByCategory(id:number){
+    this.https.get(this.listingUrl+"/Category/"+id)
+    .toPromise()
+    .then(res=>this.listingz=res as Listing[])
+  }
 }
 
 @Injectable({

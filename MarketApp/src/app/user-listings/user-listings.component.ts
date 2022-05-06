@@ -14,18 +14,21 @@ export class UserListingsComponent implements OnInit {
     public listingsService:ListingService,
     private _route:ActivatedRoute,
     public userService:DataTestService,
-    private _router:Router) { }
+    private _router:Router,
+    private accountS:AccountService) { }
 
   imageUrl: string = '/assets/img/logo.png';
-  user: DataTest;
-  reloaded:boolean = false;
+  
   ngOnInit(): void {
-    this._route.params.subscribe(routeParams => {
-    this.listingsService.getListingsByUserId(routeParams.id);
-    this.userService.getUserById(routeParams.id);
-    });
+    this.populate();
   }
-  item(id:number){
-    this._router.navigate(['/Listing',id])
+  item(id:number,user:number){
+    this._router.navigate(['/Listing',id,user])
+  }
+  populate(){
+    this._route.params.subscribe(routeParams => {
+      this.listingsService.getListingsByUserId(routeParams.id);
+      this.userService.getUserById(routeParams.id);
+      });
   }
 }

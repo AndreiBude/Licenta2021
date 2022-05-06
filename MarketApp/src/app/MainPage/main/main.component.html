@@ -1,5 +1,6 @@
 
 <body>
+  <div class="categorii">
 <div class="row row-cols-1 row-cols-md-4 mb-4 text-center">
     <div class="col">
       <div class="card mb-4 rounded-3 shadow-sm">
@@ -12,9 +13,9 @@
         </div>
       </div>
       <div class="col">
-        <button class="fill card mb-4 rounded-3 shadow-sm">
+        <a class="fill card mb-4 rounded-3 shadow-sm" href="/Category/3">
             <img src="E:\Faculta\licenta\Git\MarketApp\src\app\MainPage\main\noun-call-4642898.png" alt="pictogramă electronice">
-        </button>
+        </a>
       </div>
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm">
@@ -44,21 +45,20 @@
       </div>
     </div>    
 </div>
+</div>
 <div class="anunturi-recente">
   <h2>Anunțuri recente</h2>
-  <div class="link dropdown">
-    
-    </div>
-  <div class="carduri">
-  <div *ngFor="let listing of serviceL.listingz" class="card" style="width: 18rem;">
+  <div class="carduri row row-cols-4">
+  <div *ngFor="let listing of serviceL.listingz" class="col">
+    <div class="card">
     <img class="card-img-top" src="src\assets\img\noun-washing-machine-1552906.png" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{listing.title}}</h5>
       <p class="card-text">{{listing.description}}</p>
-      <a (click)=item(listing.listingID,listing.userID) class="btn btn-primary">Contacteaza cumparatorul</a>
+      <a (click)=item(listing.listingID,listing.userID) class="btn btn-primary">Vizualizeaza anuntul</a>
     </div>
   </div>
-    
+</div>
 </div>
 </div>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />

@@ -13,7 +13,7 @@
       <div class="card-body">
         <h5 class="card-title">{{listing.title}}</h5>
         <p class="card-text">{{listing.description}}</p>
-        <a class="btn btn-primary" (click)=item(listing.listingID)>Contacteaza cumparatorul</a>
+        <a class="btn btn-primary" (click)=item(listing.listingID,this.userService.user.userID)>Vezi anuntul</a>
       </div>
     </div>
   </div>

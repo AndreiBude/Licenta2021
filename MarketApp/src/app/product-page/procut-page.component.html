@@ -60,7 +60,7 @@
       <img
         src="https://static.stacker.com/s3fs-public/styles/slide_desktop/s3/2019-03/Screen%20Shot%202019-03-14%20at%2010.56.48%20AM.png"
         alt="...">
-      {{this.username.user.firstName}}
+      <a href='/UserListings/{{this.username.user.userID}}'>{{this.username.user.firstName}}</a>
     </div>
     <div class="reviews">
       <div class="card review shadow-sm" *ngFor="let rev of review.reviews">
