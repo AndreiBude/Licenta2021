@@ -41,7 +41,7 @@
       </div>
       <div class="descriere">
         <h5 style="white-space: pre-wrap">{{service.listing.description}}</h5>
-        <button (click)="getUser()" type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+        <button *ngIf="!sameUser" (click)="getUser()" type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
           data-bs-target="#staticBackdrop">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone"
             viewBox="0 0 16 16">
@@ -51,6 +51,9 @@
           </svg>
           Contacteaza vanzatorul
         </button>
+        <a *ngIf="sameUser" href="" (click)="getUser()" type="button" class="btn btn-outline-danger">
+          Editeaza anuntul
+        </a>
       </div>
     </div>
   </div>
@@ -58,8 +61,8 @@
   <div class="card author">
     <div class="title">
       <img
-        src="https://static.stacker.com/s3fs-public/styles/slide_desktop/s3/2019-03/Screen%20Shot%202019-03-14%20at%2010.56.48%20AM.png"
-        alt="...">
+        src='{{this.username.user.imageSource}}'
+        alt="Author">
       <a href='/UserListings/{{this.username.user.userID}}'>{{this.username.user.firstName}}</a>
     </div>
     <div class="reviews">

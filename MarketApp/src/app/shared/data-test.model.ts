@@ -2,6 +2,8 @@ export class DataTest {
     userID:number=0;
     firstName:string='';
     lastName:string='';
+    imagePath:string='';
+    imageSource:string='';
     email:string='';
     password:string='';
     createdAt:string='';

@@ -14,6 +14,5 @@ namespace VirtualMarket.Models
         public int CategoryID { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         public string CategoryName { get; set; }
-        public ICollection<Listing> Listings { get; set; }
     }
 }

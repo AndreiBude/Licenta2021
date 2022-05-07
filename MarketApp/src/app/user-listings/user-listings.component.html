@@ -1,9 +1,9 @@
 <body>
   <div class="profil card shadow-sm">
-    <img [src]="imageUrl" alt="Profile Pic">
+    <img  src="{{this.userService.user.imageSource}}" alt="Profile Pic">
     <div class="text">
       <h2>{{this.userService.user.firstName}}</h2>
-      <h4>Anunturi:</h4>
+      <h4>Anunturi:{{this.listingsService.numarAnunturi}}</h4>
     </div>
   </div>
   <h3>Anunturi</h3>

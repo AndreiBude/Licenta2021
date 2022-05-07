@@ -14,18 +14,31 @@ namespace VirtualMarket.Models
         
         [Key]
         public int UserID { get; set; }
+
         [Column(TypeName = "nvarchar(100)")]
         public string FirstName { get; set; }
+
         [Column(TypeName = "nvarchar(100)")]
         public string LastName { get; set; }
+
+        [Column(TypeName = "nvarchar(200)")]
+        public string ImagePath { get; set; }
+
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
+
+        [NotMapped]
+        public string ImageSource { get; set; }
+
         [Column(TypeName = "nvarchar(100)")]
         public string Email { get; set; }
+
         [Column(TypeName = "nvarchar(100)")]
         public string Password { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public ICollection<Listing> Listings { get; set; }
-        public ICollection<UserReview> Reviews { get; set; }
+
 
     }
 }

@@ -30,13 +30,14 @@ export class RegisterComponent implements OnInit {
     }
     reader.readAsDataURL(this.fileToUpload);
   }
-  
+
+
   onSubmit(form:NgForm){
     
     let currentDateTime =this.datepipe.transform((new Date), 'yyyy-MM-ddThh:mm:ss')||'2010-12-12T00:00:00';
     this.service.formData.createdAt=currentDateTime;
     this.service.formData.updatedAt=currentDateTime;
-    this.service.postUser().subscribe(
+    this.service.postUser(this.fileToUpload).subscribe(
       res =>{
         console.log("Success");
         this._router.navigate(['/Login']);

@@ -17,7 +17,7 @@
                         <label>Nume</label>
                         <input class="form-control mb-4 form-control-lg" placeholder="Nume" name="lastName"
                             #lastName="ngModel" [(ngModel)]="service.formData.lastName" required
-                            [class.invalid]="lastName.invalid && lastName.touched">
+                            [class.is-invalid]="lastName.invalid && lastName.touched">
                     </div>
                     <div class="form-group">
                         <label>Imagine de profil</label>
@@ -28,13 +28,13 @@
                         <label>Email</label>
                         <input class="form-control mb-4 form-control-lg" placeholder="Email" type="email" name="email" #email="ngModel"
                             [(ngModel)]="service.formData.email" required
-                            [class.invalid]="email.invalid && email.touched">
+                            [class.is-invalid]="email.invalid && email.touched">
                     </div>
                     <div class="form-group">
                         <label>Parola</label>
                         <input type='password' class="form-control mb-4 form-control-lg" placeholder="Parola"
                             name="password" #password="ngModel" [(ngModel)]="service.formData.password" required
-                            minlength="8" ng-show="password.$invalid && password.$touched">
+                            minlength="8" [class.is-invalid]="password.invalid && password.touched">
                             <span *ngIf="existing" class="red">Aceasta adresa de email este deja asociata unui cont!</span>
                     </div>
 

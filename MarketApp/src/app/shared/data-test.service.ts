@@ -17,8 +17,19 @@ export class DataTestService {
  
   list : DataTest[];
   user : DataTest;
-  postUser(){
-    return this.https.post(this.baseUrl,this.formData)
+  postUser(fileToUpload:File){
+    const newFormData = new FormData();
+      newFormData.append('firstName',this.formData.firstName.toString());
+      newFormData.append('lastName',this.formData.lastName.toString());
+      newFormData.append('email',this.formData.email.toString());
+      if(fileToUpload)
+      newFormData.append('imageFile',fileToUpload,fileToUpload.name);
+      else
+      newFormData.append('imagePath','default.jpg');
+      newFormData.append('password',this.formData.password.toString());
+      newFormData.append('createdAt',this.formData.createdAt.toString());
+      newFormData.append('updatedAt',this.formData.updatedAt.toString());
+    return this.https.post(this.baseUrl,newFormData)
   }
   refreshlist(){
     this.https.get(this.baseUrl)
@@ -61,6 +72,7 @@ export class ListingService{
   idu:number = 0;
   listing : Listing;
   listingz : Listing[];
+  numarAnunturi:number;
   getListing(id:number){
     this.https.get(this.listingUrl+"/"+id)
     .toPromise()
@@ -86,6 +98,7 @@ export class ListingService{
     this.https.get(this.listingUrl+"/User/"+id)
     .toPromise()
     .then(res=>this.listingz=res as Listing[])
+    .then(res=>this.numarAnunturi=res.length)
   }
   getListingsByCategory(id:number){
     this.https.get(this.listingUrl+"/Category/"+id)
@@ -123,8 +136,10 @@ export class AccountService{
   }
   getCurrentUser():number{
     let userID=0;
+    let imagePath='';
     this.currentUser$.subscribe(user => {
       userID = user.userID;
+      imagePath=user.imagePath;
     },error =>{
       console.log(error);
     })

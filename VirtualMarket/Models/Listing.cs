@@ -34,7 +34,5 @@ namespace VirtualMarket.Models
         public User Users { get; set; }
         [ForeignKey("CategoryID")]
         public Category Categories { get; set; }
-
-        public ICollection<UserReview> Reviews { get; set; }
     }
 }

@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
 export class CRUDFormComponent implements OnInit {
   
   constructor(public service:DataTestService,public datepipe: DatePipe) { }
-  
+  fileToUpload: File = null as any;
   ngOnInit(): void {
   }
   onSubmit(form:NgForm){
@@ -21,7 +21,7 @@ export class CRUDFormComponent implements OnInit {
     let currentDateTime =this.datepipe.transform((new Date), 'yyyy-MM-ddThh:mm:ss')||'2010-12-12T00:00:00';
     this.service.formData.createdAt=currentDateTime;
     this.service.formData.updatedAt=currentDateTime;
-    this.service.postUser().subscribe(
+    this.service.postUser(this.fileToUpload).subscribe(
       res =>{
         this.resetForm(form);
         console.log("Success");

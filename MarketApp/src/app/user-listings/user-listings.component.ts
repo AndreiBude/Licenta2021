@@ -16,9 +16,8 @@ export class UserListingsComponent implements OnInit {
     public userService:DataTestService,
     private _router:Router,
     private accountS:AccountService) { }
-
   imageUrl: string = '/assets/img/logo.png';
-  
+  profilePic:string;
   ngOnInit(): void {
     this.populate();
   }
@@ -29,6 +28,7 @@ export class UserListingsComponent implements OnInit {
     this._route.params.subscribe(routeParams => {
       this.listingsService.getListingsByUserId(routeParams.id);
       this.userService.getUserById(routeParams.id);
+      this.profilePic = this.userService.user.imageSource;
       });
   }
 }

@@ -29,14 +29,41 @@ namespace VirtualMarket.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            
+            return await _context.Users
+                .Select(x => new User()
+                {
+                    UserID = x.UserID,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Email = x.Email,
+                    Password=x.Password,
+                    ImagePath = x.ImagePath,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    ImageSource = String.Format("{0}://{1}{2}/images/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImagePath)
+                })
+                .ToListAsync();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+                 .Select(x => new User()
+                 {
+                     UserID = x.UserID,
+                     FirstName = x.FirstName,
+                     LastName = x.LastName,
+                     Email = x.Email,
+                     Password = x.Password,
+                     ImagePath = x.ImagePath,
+                     CreatedAt = x.CreatedAt,
+                     UpdatedAt = x.UpdatedAt,
+                     ImageSource = String.Format("{0}://{1}{2}/images/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImagePath)
+                 })
+                .FirstOrDefaultAsync(i => i.UserID == id);
 
             if (user == null)
             {
@@ -80,9 +107,11 @@ namespace VirtualMarket.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser([FromForm]User user)
         {
             if (await EmailExistis(user.Email)) return BadRequest("Email already existing");
+            if (user.ImagePath!="test.jpg")
+              user.ImagePath = await SaveImage(user.ImageFile);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 

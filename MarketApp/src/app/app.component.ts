@@ -13,6 +13,8 @@ export class AppComponent implements OnInit{
   constructor(private accountService: AccountService, private _router:Router) { }
   current_user:DataTest;
   loggedIn:boolean;
+  image:string;
+  baseurl='https://localhost:44309/images/'
   ngOnInit(): void {
     this.setCurrentUser();
     this.getCurrentUser();
@@ -27,6 +29,7 @@ export class AppComponent implements OnInit{
   getCurrentUser(){
     this.accountService.currentUser$.subscribe(user => {
       this.loggedIn= !!user;
+      this.image=this.baseurl+user.imagePath;
       console.log("logat?" + this.loggedIn);
     },error =>{
       console.log(error);
