@@ -4,6 +4,7 @@
     <div class="text">
       <h2>{{this.userService.user.firstName}}</h2>
       <h4>Anunturi:{{this.listingsService.numarAnunturi}}</h4>
+      <h4 *ngIf="this.reviewService.finalRating">Rating: {{this.reviewService.finalRating}} <i class="fa-solid fa-star"></i></h4>
     </div>
   </div>
   <h3>Anunturi</h3>

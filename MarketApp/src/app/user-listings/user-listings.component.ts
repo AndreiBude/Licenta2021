@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataTest } from '../shared/data-test.model';
-import { AccountService, DataTestService, ListingService } from '../shared/data-test.service';
+import { AccountService, DataTestService, ListingService, ReviewService } from '../shared/data-test.service';
 
 @Component({
   selector: 'app-user-listings',
@@ -15,7 +15,8 @@ export class UserListingsComponent implements OnInit {
     private _route:ActivatedRoute,
     public userService:DataTestService,
     private _router:Router,
-    private accountS:AccountService) { }
+    private accountS:AccountService,
+    public reviewService:ReviewService) { }
   imageUrl: string = '/assets/img/logo.png';
   profilePic:string;
   ngOnInit(): void {
@@ -28,7 +29,9 @@ export class UserListingsComponent implements OnInit {
     this._route.params.subscribe(routeParams => {
       this.listingsService.getListingsByUserId(routeParams.id);
       this.userService.getUserById(routeParams.id);
+      this.reviewService.getReviewsById(routeParams.id);
       this.profilePic = this.userService.user.imageSource;
+      
       });
   }
 }

@@ -81,7 +81,8 @@ export class ListingService{
   getListings(){
     this.https.get(this.listingUrl)
     .toPromise()
-    .then(res=>this.listingz=res as Listing[])
+    .then(res=>{this.listingz=res as Listing[];
+    this.listingz.reverse()})
   }
   postLising(fileToUpload: File){
       const newFormData = new FormData();
@@ -98,12 +99,14 @@ export class ListingService{
     this.https.get(this.listingUrl+"/User/"+id)
     .toPromise()
     .then(res=>this.listingz=res as Listing[])
-    .then(res=>this.numarAnunturi=res.length)
+    .then(res=>{this.numarAnunturi=res.length;
+      this.listingz.reverse()})
   }
   getListingsByCategory(id:number){
     this.https.get(this.listingUrl+"/Category/"+id)
     .toPromise()
-    .then(res=>this.listingz=res as Listing[])
+    .then(res=>{this.listingz=res as Listing[];
+    this.listingz.reverse();})
   }
 }
 
@@ -153,11 +156,22 @@ export class AccountService{
 export class ReviewService {
   constructor(private https:HttpClient) { }
   review:UserReview = new UserReview();
+  rating=0;
+  noOfRatings=0;
+  finalRating:number;
   readonly reviewUrl = `https://localhost:44309/api/UserReviews`;
   reviews: UserReview[];
   getReviewsById(id:number){
     this.https.get(this.reviewUrl+"/UserId/"+id)
     .toPromise()
     .then(res=>this.reviews=res as UserReview[])
+    .then(res=>{res.forEach(i=>{this.rating +=i.rating;
+    this.noOfRatings++;
+    console.log(this.rating);
+    });
+    this.finalRating=this.rating/this.noOfRatings;
+    this.finalRating= Math.round(this.finalRating * 10) / 10
+  })
   }
+  
 }

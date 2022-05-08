@@ -110,7 +110,7 @@ namespace VirtualMarket.Controllers
         public async Task<ActionResult<User>> PostUser([FromForm]User user)
         {
             if (await EmailExistis(user.Email)) return BadRequest("Email already existing");
-            if (user.ImagePath!="test.jpg")
+            if (user.ImagePath!="default.jpg")
               user.ImagePath = await SaveImage(user.ImageFile);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();

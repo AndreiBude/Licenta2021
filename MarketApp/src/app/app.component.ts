@@ -13,8 +13,8 @@ export class AppComponent implements OnInit{
   constructor(private accountService: AccountService, private _router:Router) { }
   current_user:DataTest;
   loggedIn:boolean;
-  image:string;
-  baseurl='https://localhost:44309/images/'
+  image='https://localhost:44309/images/default.jpg';
+  baseurl='https://localhost:44309/images/';
   ngOnInit(): void {
     this.setCurrentUser();
     this.getCurrentUser();
@@ -29,6 +29,7 @@ export class AppComponent implements OnInit{
   getCurrentUser(){
     this.accountService.currentUser$.subscribe(user => {
       this.loggedIn= !!user;
+      if(user)
       this.image=this.baseurl+user.imagePath;
       console.log("logat?" + this.loggedIn);
     },error =>{
@@ -47,14 +48,6 @@ export class AppComponent implements OnInit{
     })
   }
   addListing(){
-    this.accountService.currentUser$.subscribe(user => {
-      this.loggedIn= !!user;
-      if(this.loggedIn)
       this._router.navigate(['/AddListing'])
-      else
-      this._router.navigate(['/Login']);
-    },error =>{
-      console.log(error);
-    })
   }
 }
