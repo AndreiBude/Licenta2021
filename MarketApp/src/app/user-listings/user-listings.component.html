@@ -1,10 +1,16 @@
 <body>
   <div class="profil card shadow-sm">
+    <div class="left">
     <img  src="{{this.userService.user.imageSource}}" alt="Profile Pic">
     <div class="text">
       <h2>{{this.userService.user.firstName}}</h2>
       <h4>Anunturi:{{this.listingsService.numarAnunturi}}</h4>
       <h4 *ngIf="this.reviewService.finalRating">Rating: {{this.reviewService.finalRating}} <i class="fa-solid fa-star"></i></h4>
+    </div>
+    <div class="right">
+      <a *ngIf="admin" class="btn btn-primary" href="/EditProfile">Editeaza Profilul</a>
+      <a *ngIf="admin" class="btn btn-primary" href="">Sterge Profilul</a>
+    </div>
     </div>
   </div>
   <h3>Anunturi</h3>

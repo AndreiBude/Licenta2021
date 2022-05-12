@@ -76,11 +76,17 @@ namespace VirtualMarket.Controllers
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<ActionResult<User>> PutUser(int id,[FromForm] User user)
         {
             if (id != user.UserID)
             {
                 return BadRequest();
+            }
+
+            if (user.ImageFile != null)
+            {
+                DeleteImage(user.ImagePath);
+                user.ImagePath = await SaveImage(user.ImageFile);
             }
 
             _context.Entry(user).State = EntityState.Modified;
@@ -100,8 +106,8 @@ namespace VirtualMarket.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
+            var resutl = await _context.Users.FirstOrDefaultAsync(x => x.UserID == id);
+            return resutl;
         }
 
         // POST: api/Users
@@ -150,6 +156,22 @@ namespace VirtualMarket.Controllers
             return NoContent();
         }
 
+        [HttpDelete("Photo/{id}")]
+        public async Task<IActionResult> DeletePhoto(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            DeleteImage(user.ImagePath);
+            user.ImagePath = "default.jpg";
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.UserID == id);
@@ -166,6 +188,15 @@ namespace VirtualMarket.Controllers
                 await imageFile.CopyToAsync(fileStream);
             }
             return imageName;
+        }
+        [NonAction]
+        public void DeleteImage(string imageName)
+        {
+            var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "images", imageName);
+            if (System.IO.File.Exists(imagePath))
+            {
+                System.IO.File.Delete(imagePath);
+            }
         }
     }
 }

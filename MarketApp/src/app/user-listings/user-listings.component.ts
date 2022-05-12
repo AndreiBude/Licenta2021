@@ -19,19 +19,27 @@ export class UserListingsComponent implements OnInit {
     public reviewService:ReviewService) { }
   imageUrl: string = '/assets/img/logo.png';
   profilePic:string;
+  currentUserId:number;
+  admin:boolean;
   ngOnInit(): void {
-    this.populate();
+    const id = +this._route.snapshot.params['id'];
+    this.populate(id);
+    
   }
   item(id:number,user:number){
     this._router.navigate(['/Listing',id,user])
   }
-  populate(){
-    this._route.params.subscribe(routeParams => {
-      this.listingsService.getListingsByUserId(routeParams.id);
-      this.userService.getUserById(routeParams.id);
-      this.reviewService.getReviewsById(routeParams.id);
+  populate(id:number){
+      this.listingsService.getListingsByUserId(id);
+      this.userService.getUserById(id);
+      this.reviewService.getReviewsById(id);
+      this.accountService.currentUser$.subscribe(user => {
+        this.currentUserId=user.userID;
+        if(id==this.currentUserId)
+        this.admin=true;
+      },error =>{
+        console.log(error);
+      })
       this.profilePic = this.userService.user.imageSource;
-      
-      });
   }
 }

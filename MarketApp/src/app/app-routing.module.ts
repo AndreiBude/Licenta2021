@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { AddListingComponent } from './add-listing/add-listing.component';
 import { UserListingsComponent } from './user-listings/user-listings.component';
 import { CategoryComponent } from './category/category.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {path:'MainPage', component:MainComponent},
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path:'Register',component:RegisterComponent},
   {path:'AddListing',component:AddListingComponent},
   {path:'UserListings/:id',component:UserListingsComponent},
-  {path:'Category/:id',component:CategoryComponent}
+  {path:'Category/:id',component:CategoryComponent},
+  {path:'EditProfile',component:EditProfileComponent}
 ];
 
 @NgModule({

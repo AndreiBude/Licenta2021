@@ -31,6 +31,25 @@ export class DataTestService {
       newFormData.append('updatedAt',this.formData.updatedAt.toString());
     return this.https.post(this.baseUrl,newFormData)
   }
+
+  putUser(fileToUpload:File){
+    const newFormData = new FormData();
+      newFormData.append('userID',this.user.userID.toString());
+      newFormData.append('firstName',this.user.firstName.toString());
+      newFormData.append('lastName',this.user.lastName.toString());
+      newFormData.append('email',this.user.email.toString());
+      newFormData.append('imagePath',this.user.imagePath.toString());
+      if(fileToUpload)
+      newFormData.append('imageFile',fileToUpload,fileToUpload.name);
+      if(!this.formData.password)
+      newFormData.append('password',this.user.password.toString());
+      else
+      newFormData.append('password',this.formData.password.toString());
+      newFormData.append('createdAt',this.user.createdAt.toString());
+      newFormData.append('updatedAt',this.formData.updatedAt.toString());
+    return this.https.put(`${this.baseUrl}/${this.user.userID}`,newFormData)
+  }
+
   refreshlist(){
     this.https.get(this.baseUrl)
     .toPromise()
@@ -43,6 +62,10 @@ export class DataTestService {
     this.https.get(`${this.baseUrl}/${id}`)
     .toPromise()
     .then(res=>this.user=res as DataTest)
+  }
+  deletePhoto(id:number){
+    this.https.delete(`${this.baseUrl}/Photo/${id}`);
+    console.log(`${this.baseUrl}/Photo/${id}`);
   }
   
 }

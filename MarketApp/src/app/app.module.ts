@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { AddListingComponent } from './add-listing/add-listing.component';
 import { UserListingsComponent } from './user-listings/user-listings.component';
 import { CategoryComponent } from './category/category.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CategoryComponent } from './category/category.component';
     AddListingComponent,
     UserListingsComponent,
     CategoryComponent,
+    EditProfileComponent,
   ],
   imports: [
     AppRoutingModule,

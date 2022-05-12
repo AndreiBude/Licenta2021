@@ -1,0 +1,51 @@
+<section>
+    <div class="container py-5 shadow-sm">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <button (click)="delete()">Delete photo</button>
+                <img src="{{this.service.user.imageSource}}" class="img-fluid" alt="Upload Image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+                    <input type="hidden" name="usersID" [(ngModel)]="service.user.userID" />
+                    <div class="form-group">
+                        <label>Prenume</label>
+                        <input class="form-control mb-4 form-control-lg" placeholder="Prenume" name="firstName"
+                            #firstName="ngModel" [(ngModel)]="service.user.firstName" required
+                            [class.is-invalid]="firstName.invalid && firstName.touched">
+                    </div>
+                    <div class="form-group">
+                        <label>Nume</label>
+                        <input class="form-control mb-4 form-control-lg" placeholder="Nume" name="lastName"
+                            #lastName="ngModel" [(ngModel)]="service.user.lastName" required
+                            [class.is-invalid]="lastName.invalid && lastName.touched">
+                    </div>
+                    <div class="form-group">
+                        <label>Imagine de profil</label>
+                        <input (change)="handleFileInput($any($event).target.files)" type="file" accept="image/*" #Image
+                            class="form-control mb-4 form-control-lg" placeholder="Image" name="image" >
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control mb-4 form-control-lg" placeholder="Email" type="email" name="email" #email="ngModel"
+                            [(ngModel)]="service.user.email" required
+                            [class.is-invalid]="email.invalid && email.touched">
+                    </div>
+                    <div class="form-group">
+                        <label>Parola</label>
+                        <input type='password' class="form-control mb-4 form-control-lg" placeholder="Parola"
+                            name="password" #password="ngModel" [(ngModel)]="service.formData.password"
+                            minlength="8">
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-info btn-lg btn-block" type="submit"
+                            [disabled]="form.invalid">Register</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

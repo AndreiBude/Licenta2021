@@ -17,14 +17,26 @@ body{
     background-color: white;
     margin: 0em 10em;
     height: 20em;
+    
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.right a{
+    width: 15em;
+}
+.left{
     display: grid;
-    grid-template-columns: 1fr 7fr;
+    grid-template-columns: 1fr 4fr 4fr;
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 }
 
-.profil img {
+.profil .left img {
     width: 12em;
     height: 12em;
     border-radius: 15em;
@@ -32,11 +44,11 @@ body{
     margin: 1.5em;
 }
 
-.profil .text {
+.profil .left .text {
     padding: 3em 2em;
 }
 
-.profil h4 i{
+.profil .left h4 i{
     color:yellow;
     -webkit-text-stroke: 1px black;
 }

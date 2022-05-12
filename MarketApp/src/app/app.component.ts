@@ -41,6 +41,8 @@ export class AppComponent implements OnInit{
       this.loggedIn= !!user;
       if(this.loggedIn)
       this._router.navigate(['/UserListings',user.userID])
+      .then(() =>
+      window.location.reload())
       else
       this._router.navigate(['/Login']);
     },error =>{
