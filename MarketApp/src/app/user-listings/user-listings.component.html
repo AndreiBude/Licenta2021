@@ -9,7 +9,8 @@
     </div>
     <div class="right">
       <a *ngIf="admin" class="btn btn-primary" href="/EditProfile">Editeaza Profilul</a>
-      <a *ngIf="admin" class="btn btn-primary" href="">Sterge Profilul</a>
+      <button *ngIf="admin" class="btn btn-primary"  data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop">Sterge Profilul</button>
     </div>
     </div>
   </div>
@@ -24,4 +25,22 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Esti sigur ca vrei sa stergi acest cont?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         Stergerea contului va duce la disparitia tuturor anunturilor si ratingurilor tale.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Nu</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteProfile(this.userService.user.userID)" >Da</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>

@@ -149,6 +149,17 @@ namespace VirtualMarket.Controllers
             {
                 return NotFound();
             }
+            List<Listing> listingz = await _context.Listings
+                .Where(x=> x.UserID == id)
+                .ToListAsync();
+            List<UserReview> userReviews = await _context.Reviews
+                .Where(x => x.UserID == id)
+                .ToListAsync();
+            foreach (Listing listing in listingz)
+                _context.Listings.Remove(listing);
+
+            foreach (UserReview review in userReviews)
+                _context.Reviews.Remove(review);
 
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
@@ -157,7 +168,7 @@ namespace VirtualMarket.Controllers
         }
 
         [HttpDelete("Photo/{id}")]
-        public async Task<IActionResult> DeletePhoto(int id)
+        public async Task<ActionResult<User>> DeletePhoto(int id)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null)
@@ -169,7 +180,8 @@ namespace VirtualMarket.Controllers
             user.ImagePath = "default.jpg";
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            var resutl = await _context.Users.FirstOrDefaultAsync(x => x.UserID == id);
+            return resutl;
         }
 
         private bool UserExists(int id)

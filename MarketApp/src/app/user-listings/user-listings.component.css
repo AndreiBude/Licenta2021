@@ -28,6 +28,10 @@ body{
 .right a{
     width: 15em;
 }
+.right button{
+    width: 15em;
+}
+
 .left{
     display: grid;
     grid-template-columns: 1fr 4fr 4fr;

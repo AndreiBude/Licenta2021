@@ -1,9 +1,9 @@
 <section>
     <div class="container py-5 shadow-sm">
         <div class="row d-flex align-items-center justify-content-center">
-            <div class="col-md-8 col-lg-7 col-xl-6">
-                <button (click)="delete()">Delete photo</button>
+            <div class="col-md-8 col-lg-7 col-xl-6 photo">
                 <img src="{{this.service.user.imageSource}}" class="img-fluid" alt="Upload Image">
+                <button class="btn btn-info btn-lg btn-block" (click)="delete()">Delete photo</button>
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                 <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
@@ -40,7 +40,7 @@
 
                     <div class="form-group">
                         <button class="btn btn-info btn-lg btn-block" type="submit"
-                            [disabled]="form.invalid">Register</button>
+                            [disabled]="form.invalid">Actualizeaza profilul</button>
                     </div>
 
 

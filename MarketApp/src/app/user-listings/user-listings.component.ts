@@ -42,4 +42,11 @@ export class UserListingsComponent implements OnInit {
       })
       this.profilePic = this.userService.user.imageSource;
   }
-}
+  deleteProfile(id:number){
+    this.userService.deleteDataTest(id).subscribe(
+      ()=>{
+    this.accountService.logout();
+    this._router.navigate(['/MainPage']);})
+  }
+  }
+

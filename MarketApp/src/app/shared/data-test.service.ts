@@ -64,8 +64,7 @@ export class DataTestService {
     .then(res=>this.user=res as DataTest)
   }
   deletePhoto(id:number){
-    this.https.delete(`${this.baseUrl}/Photo/${id}`);
-    console.log(`${this.baseUrl}/Photo/${id}`);
+    return this.https.delete(`${this.baseUrl}/Photo/${id}`);
   }
   
 }

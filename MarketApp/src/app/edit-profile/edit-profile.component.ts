@@ -37,14 +37,18 @@ export class EditProfileComponent implements OnInit {
     //preview
     var reader = new FileReader();
     reader.onload = (event: any) => {
-      this.imageUrl = event.target.result;
+      this.service.user.imageSource = event.target.result;
     }
     reader.readAsDataURL(this.fileToUpload);
   }
 
   delete(){
     this.accountService.currentUser$.subscribe(user => {
-      this.service.deletePhoto(user.userID);
+      this.service.deletePhoto(user.userID).subscribe(
+        res=>{
+          localStorage.setItem('user',JSON.stringify(res));
+          window.location.reload();
+        });
       //window.location.reload();
     },error =>{
       console.log(error);
