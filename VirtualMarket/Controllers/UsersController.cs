@@ -149,17 +149,10 @@ namespace VirtualMarket.Controllers
             {
                 return NotFound();
             }
-            List<Listing> listingz = await _context.Listings
-                .Where(x=> x.UserID == id)
-                .ToListAsync();
-            List<UserReview> userReviews = await _context.Reviews
-                .Where(x => x.UserID == id)
-                .ToListAsync();
-            foreach (Listing listing in listingz)
-                _context.Listings.Remove(listing);
-
-            foreach (UserReview review in userReviews)
-                _context.Reviews.Remove(review);
+            if (user.ImagePath != "default.jpg")
+            {
+                DeleteImage(user.ImagePath);
+            }
 
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
@@ -175,8 +168,9 @@ namespace VirtualMarket.Controllers
             {
                 return NotFound();
             }
-
+            if (user.ImagePath != "default.jpg") { 
             DeleteImage(user.ImagePath);
+            }
             user.ImagePath = "default.jpg";
             await _context.SaveChangesAsync();
 

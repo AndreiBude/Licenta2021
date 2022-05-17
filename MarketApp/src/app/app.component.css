@@ -32,6 +32,7 @@ body{
   .cautare button{
     background-color: #1266f1;
     color: white;
+    width: 5em;
   }
 .footer_area {
     position: relative;

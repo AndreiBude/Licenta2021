@@ -95,6 +95,7 @@ export class ListingService{
   listing : Listing;
   listingz : Listing[];
   numarAnunturi:number;
+  empty=false;
   getListing(id:number){
     this.https.get(this.listingUrl+"/"+id)
     .toPromise()
@@ -129,6 +130,17 @@ export class ListingService{
     .toPromise()
     .then(res=>{this.listingz=res as Listing[];
     this.listingz.reverse();})
+  }
+  getListingsByKey(key:string){
+    return this.https.get(`${this.listingUrl}/Search/${key}`).subscribe(
+      res=>{
+        this.listingz = res as Listing[];
+        if(this.listingz.length == 0)
+        this.empty=true;
+        else
+        this.empty=false;
+      }
+    );
   }
 }
 

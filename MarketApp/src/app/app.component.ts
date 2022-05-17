@@ -15,6 +15,7 @@ export class AppComponent implements OnInit{
   loggedIn:boolean;
   image='https://localhost:44309/images/default.jpg';
   baseurl='https://localhost:44309/images/';
+  searchText:string;
   ngOnInit(): void {
     this.setCurrentUser();
     this.getCurrentUser();
@@ -51,5 +52,12 @@ export class AppComponent implements OnInit{
   }
   addListing(){
       this._router.navigate(['/AddListing'])
+  }
+
+  search(){
+    this.searchText = (<HTMLInputElement>document.getElementById("search")).value;
+    if(this.searchText)
+    this._router.navigate(['/']).then(()=>this._router.navigate(['/Search',this.searchText]))
+    
   }
 }

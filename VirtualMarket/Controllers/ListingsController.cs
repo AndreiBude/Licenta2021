@@ -115,6 +115,27 @@ namespace VirtualMarket.Controllers
             return listing;
         }
 
+        //GET:api/Listings/Search/key
+        [HttpGet("Search/{key}")]
+        public async Task<ActionResult<IEnumerable<Listing>>> GetListingByKey(string key)
+        {
+            var listing = await _context.Listings
+                .Where(x => x.Title.Contains(key))
+                .Select(x => new Listing()
+                {
+                    ListingID = x.ListingID,
+                    UserID = x.UserID,
+                    Title = x.Title,
+                    Price = x.Price,
+                    CategoryID = x.CategoryID,
+                    Description = x.Description,
+                    ImagePath = x.ImagePath,
+                    PublishedAt = x.PublishedAt,
+                    ImageSource = String.Format("{0}://{1}{2}/images/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImagePath)
+                })
+                .ToListAsync();
+            return listing;
+        }
         // PUT: api/Listings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -169,6 +190,7 @@ namespace VirtualMarket.Controllers
                 return NotFound();
             }
 
+            DeleteImage(listing.ImagePath);
             _context.Listings.Remove(listing);
             await _context.SaveChangesAsync();
 
@@ -191,6 +213,15 @@ namespace VirtualMarket.Controllers
                 await imageFile.CopyToAsync(fileStream);
             }
             return imageName;
+        }
+        [NonAction]
+        public void DeleteImage(string imageName)
+        {
+            var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "images", imageName);
+            if (System.IO.File.Exists(imagePath))
+            {
+                System.IO.File.Delete(imagePath);
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ import { AddListingComponent } from './add-listing/add-listing.component';
 import { UserListingsComponent } from './user-listings/user-listings.component';
 import { CategoryComponent } from './category/category.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     UserListingsComponent,
     CategoryComponent,
     EditProfileComponent,
+    SearchComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -28,7 +28,7 @@ export class AddListingComponent implements OnInit {
     this.service.formData.publishedAt= currentDateTime;
     this.service.postLising(this.fileToUpload).subscribe(
       res => {
-        console.log("Success");
+        this._router.navigate(['/MainPage']);
       },
       err => {
         console.log(err);

@@ -11,6 +11,7 @@ import { AddListingComponent } from './add-listing/add-listing.component';
 import { UserListingsComponent } from './user-listings/user-listings.component';
 import { CategoryComponent } from './category/category.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {path:'MainPage', component:MainComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path:'AddListing',component:AddListingComponent},
   {path:'UserListings/:id',component:UserListingsComponent},
   {path:'Category/:id',component:CategoryComponent},
-  {path:'EditProfile',component:EditProfileComponent}
+  {path:'EditProfile',component:EditProfileComponent},
+  {path:'Search/:key',component:SearchComponent}
 ];
 
 @NgModule({

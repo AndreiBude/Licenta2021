@@ -1,16 +1,14 @@
 <header id='navbar' class="py-3 mb-3 border-bottom">
-  <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 0.5fr 1fr 0.5fr;">
+  <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 0.5fr 0.5fr 0.5fr;">
     <a class="MainLink" href="/MainPage">
       <h3 class="titlu">Virutal Market</h3>
     </a>
 
     <div class="d-flex align-items-center">
-      <form class="cautare container-fluid d-grid align-items-center" style="grid-template-columns: 2fr 1fr 0.2fr;">
-        <input type="search" style="border-radius: 5px 0px 0px 5px;" class="form-control" placeholder="Căutare..."
+      <form class="cautare container-fluid d-grid align-items-center" style="grid-template-columns: 1.5fr 0.2fr;" >
+        <input type="search" style="border-radius: 5px 0px 0px 5px;" class="form-control" placeholder="Căutare..."  id="search"
           aria-label="Căutare">
-        <input type="search" style="border-radius: 0px;" class="form-control" placeholder="Locație..."
-          aria-label="Locație">
-        <button style="border-radius: 0px 5px 5px 0px;" type="button" class="btn">
+        <button style="border-radius: 0px 5px 5px 0px;" type="button" class="btn" (click)="search()">
           <i class="fas fa-search"></i>
         </button>
       </form>
