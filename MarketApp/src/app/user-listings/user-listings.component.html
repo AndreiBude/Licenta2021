@@ -8,6 +8,8 @@
       <h4 *ngIf="this.reviewService.finalRating">Rating: {{this.reviewService.finalRating}} <i class="fa-solid fa-star"></i></h4>
     </div>
     <div class="right">
+      <button *ngIf="!admin" class="btn btn-primary"  data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop2">Lasa o recenzie</button>
       <a *ngIf="admin" class="btn btn-primary" href="/EditProfile">Editeaza Profilul</a>
       <button *ngIf="admin" class="btn btn-primary"  data-bs-toggle="modal"
       data-bs-target="#staticBackdrop">Sterge Profilul</button>
@@ -15,8 +17,8 @@
     </div>
   </div>
   <h3>Anunturi</h3>
-  <div class="carduri">
-    <div *ngFor="let listing of listingsService.listingz" class="card" style="width: 18rem;">
+  <div class="carduri row row-cols-1 row-cols-md-4 mb-4 text-center">
+    <div *ngFor="let listing of listingsService.listingz" class="card col">
       <img class="card-img-top" src="{{listing.imageSource}}" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{listing.title}}</h5>
@@ -25,6 +27,41 @@
       </div>
     </div>
   </div>
+
+  
+
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Lasa o recenzie</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit()">
+          <div class="form-group">
+              <input class="form-control mb-4 form-control-lg" placeholder="Recenzie..." name="titlu"
+              [(ngModel)]="reviewService.formData.text" required>
+          </div>
+          <div class="rating rating2">
+          <a (click)="setRating(5)" title="Give 5 stars">★</a>
+          <a (click)="setRating(4)" title="Give 4 stars">★</a>
+          <a (click)="setRating(3)" title="Give 3 stars">★</a>
+          <a (click)="setRating(2)" title="Give 2 stars">★</a>
+          <a (click)="setRating(1)" title="Give 1 star">★</a> 
+          <span *ngIf="this.reviewService.formData.rating!=0">{{this.reviewService.formData.rating}}</span>
+        </div>
+          <div class="form-group modal-footer">
+            <button type="button" class="btn btn-danger" id="closeModal" data-bs-dismiss="modal" #closeModal>Renunta</button>
+            <button class="btn btn-primary" type="submit" [disabled]="form.invalid || this.reviewService.formData.rating==0">Adauga anuntul!</button>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

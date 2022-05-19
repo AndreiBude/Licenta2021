@@ -193,6 +193,7 @@ export class ReviewService {
   rating=0;
   noOfRatings=0;
   finalRating:number;
+  formData:UserReview = new UserReview();
   readonly reviewUrl = `https://localhost:44309/api/UserReviews`;
   reviews: UserReview[];
   getReviewsById(id:number){
@@ -201,11 +202,13 @@ export class ReviewService {
     .then(res=>this.reviews=res as UserReview[])
     .then(res=>{res.forEach(i=>{this.rating +=i.rating;
     this.noOfRatings++;
-    console.log(this.rating);
     });
     this.finalRating=this.rating/this.noOfRatings;
     this.finalRating= Math.round(this.finalRating * 10) / 10
   })
+  }
+  postReview(){
+    return this.https.post(this.reviewUrl,this.formData);
   }
   
 }

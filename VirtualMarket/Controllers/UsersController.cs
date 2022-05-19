@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -37,7 +40,8 @@ namespace VirtualMarket.Controllers
                     FirstName = x.FirstName,
                     LastName = x.LastName,
                     Email = x.Email,
-                    Password=x.Password,
+                    PasswordHash=x.PasswordHash,
+                    PasswordSalt = x.PasswordSalt,
                     ImagePath = x.ImagePath,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
@@ -57,7 +61,8 @@ namespace VirtualMarket.Controllers
                      FirstName = x.FirstName,
                      LastName = x.LastName,
                      Email = x.Email,
-                     Password = x.Password,
+                     PasswordHash = x.PasswordHash,
+                     PasswordSalt = x.PasswordSalt,
                      ImagePath = x.ImagePath,
                      CreatedAt = x.CreatedAt,
                      UpdatedAt = x.UpdatedAt,
@@ -113,15 +118,32 @@ namespace VirtualMarket.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser([FromForm]User user)
+        public async Task<ActionResult<User>> PostUser([FromForm]Register user)
         {
             if (await EmailExistis(user.Email)) return BadRequest("Email already existing");
-            if (user.ImagePath!="default.jpg")
-              user.ImagePath = await SaveImage(user.ImageFile);
-            _context.Users.Add(user);
+            if (!Regex.IsMatch(user.Password, @"[~`!@#$%\^\&\*\(\)\-_\+=\[\{\]\}\|\\;:'\""<\,>\.\?\/£]", RegexOptions.ECMAScript) ||!(Regex.IsMatch(user.Password, @"[A-Z]", RegexOptions.ECMAScript) && Regex.IsMatch(user.Password, @"[a-z]", RegexOptions.ECMAScript)) || !Regex.IsMatch(user.Password, @"[\d]", RegexOptions.ECMAScript))
+            {
+                return BadRequest("Password doesn't match requirements");
+            }
+            using var hmac = new HMACSHA512();
+            var newUser = new User
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                ImagePath = user.ImagePath,
+                ImageFile = user.ImageFile,
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(user.Password)),
+                PasswordSalt = hmac.Key,
+                CreatedAt = user.CreatedAt,
+                UpdatedAt = user.UpdatedAt
+            };
+            if (newUser.ImagePath!="default.jpg")
+                newUser.ImagePath = await SaveImage(newUser.ImageFile);
+            _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserID }, user);
+            return CreatedAtAction("GetUser", new { id = newUser.UserID }, newUser);
         }
 
         private async Task<bool> EmailExistis(string email)
@@ -136,7 +158,14 @@ namespace VirtualMarket.Controllers
                 .SingleOrDefaultAsync(x => x.Email == loginDto.Email);
 
             if (user == null) return Unauthorized("Email not existing");
-            if (user.Password != loginDto.Password) return Unauthorized("Wrong Password!");
+
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+            for(int i = 0; i < computedHash.Length; ++i)
+            {
+                if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid Password");
+            }
             return user;
         }
 

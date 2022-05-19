@@ -33,8 +33,9 @@ namespace VirtualMarket.Models
         [Column(TypeName = "nvarchar(100)")]
         public string Email { get; set; }
 
-        [Column(TypeName = "nvarchar(100)")]
-        public string Password { get; set; }
+        
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VirtualMarket.Models;
 
 namespace VirtualMarket.Migrations
 {
     [DbContext(typeof(MarketContext))]
-    partial class MarketInfoModelSnapshot : ModelSnapshot
+    [Migration("20220518100136_PasswordEncoding")]
+    partial class PasswordEncoding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

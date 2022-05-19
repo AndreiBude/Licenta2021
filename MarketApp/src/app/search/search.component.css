@@ -2,19 +2,27 @@
 body{
     padding: 4rem 0em 8em 0em;
     background-color: #f8f8f8;
+    max-width: 100%;
+    overflow-x: hidden;
+
   }
   
 
-.carduri{
+  .carduri {
     display: flex;
-    min-width: none;
+    justify-content: space-evenly;
+}
 
-  }
-  .carduri .card{
-    min-width: 10em;
+.carduri .card{
     margin:2em 3em;
+    width: 20.6em;
   }
-
+  .carduri .col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 20.6em;
+  }
 
   .card-text{
     height: 3em;
@@ -24,18 +32,19 @@ body{
     text-align: center;
   }
   .card-body a{
-    margin-top: 0em;
+    margin-top: 2em;
   }
   .card-body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-top: 1px solid rgb(211, 211, 211);
   }
   .card-img-top{
-    width: 20.5em;
-    height: 14em;
+      width: 20.5em;
+      height: 14em;
   }
-  p{
+  .nimic{
       display: flex;
       justify-content: center;
       margin-bottom: 20.4em;

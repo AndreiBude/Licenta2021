@@ -1,15 +1,13 @@
 <body>
-    <p *ngIf="this.service.empty">Niciun rezultat gasit</p>
-    <div class="carduri row row-cols-4">
-        <div *ngFor="let listing of service.listingz" class="col">
-            <div class="card">
-                <img class="card-img-top" src="{{listing.imageSource}}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{listing.title}}</h5>
-                    <p class="card-text">{{listing.description}}</p>
-                    <a class="btn btn-primary" href="/Listing/{{listing.listingID}}/{{listing.userID}}">Vizualizeaza anuntul</a>
-                </div>
-            </div>
+    <p class="nimic" *ngIf="this.service.empty">Niciun rezultat gasit</p>
+    <div class="carduri row row-cols-1 row-cols-md-4 mb-4 text-center">
+        <div *ngFor="let listing of service.listingz" class="card col">
+          <img class="card-img-top" src="{{listing.imageSource}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{listing.title}}</h5>
+            <p class="card-text">{{listing.description}}</p>
+            <a class="btn btn-primary" href="/Listing/{{listing.listingID}}/{{listing.userID}}">Vezi anuntul</a>
+          </div>
         </div>
-    </div>
+      </div>
 </body>

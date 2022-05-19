@@ -56,9 +56,9 @@
 </div>
 <div class="anunturi-recente">
   <h2>Anunțuri recente</h2>
-  <div class="carduri row row-cols-4">
+  <div class="carduri row row-cols-1 row-cols-md-4 mb-4 text-center">
   <div *ngFor="let listing of serviceL.listingz" class="col">
-    <div class="card">
+    <div class="fill card mb-4 rounded-3">
     <img class="card-img-top" src="{{listing.imageSource}}" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{listing.title}}</h5>

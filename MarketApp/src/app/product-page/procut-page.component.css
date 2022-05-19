@@ -5,10 +5,6 @@
     margin: 0% 4em;
     padding: 1em 1em;
 }
-.carousel{
-    width: 55em;
-    min-width: 45em;
-}
 body{
     padding: 4rem 0em 8em 0em;
     background-color: #f8f8f8;
@@ -32,16 +28,6 @@ body{
     background-color: rgb(240, 90, 49);
 }
 
-.carousel-indicators{
-    background-color: black;
-    opacity: .85;
-    margin-left: 23em;
-    margin-right: 23em;
-    justify-self: center;
-    align-self: center;
-    border-radius: 10px;
-    min-width: 2em;
-}
 .author{
     margin-top: 2em;
 }
@@ -61,6 +47,7 @@ body{
     width: 5em;
     height: 5em;
     border-radius: 7em;
+    object-fit: cover;
 }
 
 .review{
@@ -79,4 +66,9 @@ body{
 .title a{
     text-decoration: none;
     color:black;
+}
+.imagine img{
+    width: 60rem;
+    height: 37rem;
+    object-fit: contain;
 }

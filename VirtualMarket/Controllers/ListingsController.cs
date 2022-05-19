@@ -98,6 +98,7 @@ namespace VirtualMarket.Controllers
         public async Task<ActionResult<IEnumerable<Listing>>> GetListingByCategory(int id)
         {
             var listing = await _context.Listings
+                .Where(l => l.CategoryID == id)
                 .Select(x => new Listing()
                 {
                     ListingID = x.ListingID,
@@ -110,7 +111,6 @@ namespace VirtualMarket.Controllers
                     PublishedAt = x.PublishedAt,
                     ImageSource = String.Format("{0}://{1}{2}/images/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImagePath)
                 })
-                .Where(l => l.CategoryID == id)
                 .ToListAsync();
             return listing;
         }

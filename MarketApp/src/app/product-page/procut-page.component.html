@@ -2,42 +2,8 @@
   <div class="card">
     <h2>{{service.listing.title}}</h2>
     <div class="prod">
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="20000">
-            <img
-              src="{{service.listing.imageSource}}"
-              class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item" data-bs-interval="20000">
-            <img
-              src="https://static.stacker.com/s3fs-public/styles/slide_desktop/s3/2019-03/Screen%20Shot%202019-03-14%20at%2010.56.48%20AM.png"
-              class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item" data-bs-interval="20000">
-            <img
-              src="https://www.investopedia.com/thmb/U9hwM7PAaICucCo6D_ZQdy-k5qw=/792x446/filters:fill(auto,1)/Screen_Shot_2019-06-05_at_1.26.32_PM-dac1adde23c240a4825240d08bd977b0.jpg"
-              class="d-block w-100" alt="...">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-          data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-          data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+      <div class="imagine">
+        <img src="{{service.listing.imageSource}}" alt="product image">
       </div>
       <div class="descriere">
         <h5 style="white-space: pre-wrap">{{service.listing.description}}</h5>

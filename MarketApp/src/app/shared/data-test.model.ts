@@ -32,5 +32,6 @@ export class UserReview{
     userID:number=0;
     text:string='';
     rating:number=0;
-    createdAt:string=''
+    createdAt:string='';
+    listingID:number=0;
 }
